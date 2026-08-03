@@ -372,15 +372,15 @@
         </div>
 
         <!-- Main Character Card (Bright Clean Card) -->
-        <div class="bright-card p-5.5 rounded-2xl shadow-xl space-y-5 relative overflow-hidden">
+        <div class="bright-card p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden">
           
-          <div class="flex items-center space-x-3.5 border-b border-slate-200 pb-4">
-            <div id="res-icon" class="text-3xl w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-purple-100/80 border border-purple-200 flex items-center justify-center shrink-0 shadow-xs leading-none select-none overflow-hidden">
+          <div class="flex items-center space-x-4 border-b border-slate-200/80 pb-5">
+            <div id="res-icon" class="text-2xl w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 border border-purple-200 flex items-center justify-center shrink-0 shadow-sm leading-none select-none p-3">
               ⚡
             </div>
-            <div>
-              <div class="text-xs text-purple-700 font-extrabold">성향 분석 종합 리포트</div>
-              <div id="res-sub-desc" class="text-xs font-black text-slate-900 mt-0.5 leading-snug">실전 순발력과 강력한 마감 몰입도의 소유자</div>
+            <div class="space-y-1">
+              <div class="text-xs text-purple-700 font-extrabold tracking-wide">성향 분석 종합 리포트</div>
+              <div id="res-sub-desc" class="text-xs sm:text-sm font-black text-slate-900 leading-snug">실전 순발력과 강력한 마감 몰입도의 소유자</div>
             </div>
           </div>
 
@@ -898,10 +898,10 @@
       factsList.innerHTML = "";
       res.facts.forEach((fact, i) => {
         const li = document.createElement("li");
-        li.className = "flex items-start space-x-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/80 shadow-2xs";
+        li.className = "flex items-start space-x-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 shadow-2xs";
         li.innerHTML = `
           <span class="text-purple-600 font-black font-outfit text-xs shrink-0 mt-0.5">0${i + 1}.</span>
-          <span class="text-slate-800 font-extrabold leading-relaxed">${fact}</span>
+          <span class="text-slate-800 font-extrabold leading-relaxed text-xs sm:text-sm">${fact}</span>
         `;
         factsList.appendChild(li);
       });
