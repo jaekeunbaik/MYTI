@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MYTI - 내 안의 취업/이직 페르소나 테스트</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="나는 면접장에 가면 어떤 캐릭터일까? 12문항으로 알아보는 100% 무료 취업/이직 MBTI 심리테스트! 내 맞춤 페르소나와 팩폭 분석을 확인하세요.">
+  <meta name="keywords" content="MBTI테스트, 취업MBTI, 이직테스트, 면접성향테스트, 자소서테스트, MYTI, draft_ethan">
+  <meta name="author" content="MYTI">
+  
+  <!-- Open Graph / Kakao / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://myti-job-test.vercel.app">
+  <meta property="og:title" content="내 안의 취업/이직 페르소나 테스트 (MYTI)">
+  <meta property="og:description" content="나는 면접장에 가면 어떤 캐릭터일까? (소요시간: 1분 30초) 지금 내 페르소나를 확인해보세요!">
+  <meta property="og:image" content="./og-image.png">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="내 안의 취업/이직 페르소나 테스트 (MYTI)">
+  <meta name="twitter:description" content="나는 면접장에 가면 어떤 캐릭터일까? 1분 30초 취업/이직 MBTI 심리테스트">
+  <meta name="twitter:image" content="./og-image.png">
+
+  <!-- Google Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f3ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              purple: '#8b5cf6',
+              neon: '#a855f7',
+              accent: '#ec4899',
+              darkBg: '#0b0f19',
+              cardBg: '#151c2e'
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bounce-subtle': 'bounceSubtle 2s infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'float': 'float 3s ease-in-out infinite'
+          },
+          keyframes: {
+            bounceSubtle: {
+              '0%, 100%': { transform: 'translateY(-3%)' },
+              '50%': { transform: 'translateY(0)' }
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)' },
+              '100%': { boxShadow: '0 0 30px rgba(168, 85, 247, 0.8)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #050811;
+      color: #f1f5f9;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .font-outfit {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Modern Glassmorphism */
+    .glass-card {
+      background: rgba(21, 28, 46, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .glass-card-interactive {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .glass-card-interactive:active {
+      transform: scale(0.98);
+      background: rgba(139, 92, 246, 0.15);
+      border-color: rgba(168, 85, 247, 0.5);
+    }
+
+    @media (hover: hover) {
+      .glass-card-interactive:hover {
+        background: rgba(139, 92, 246, 0.12);
+        border-color: rgba(168, 85, 247, 0.4);
+        transform: translateY(-2px);
+      }
+    }
+
+    /* AdSense Placeholder Styles */
+    .adsense-placeholder {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(30, 41, 59, 0.6),
+        rgba(30, 41, 59, 0.6) 10px,
+        rgba(15, 23, 42, 0.6) 10px,
+        rgba(15, 23, 42, 0.6) 20px
+      );
+      border: 1px dashed rgba(148, 163, 184, 0.3);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-btn {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+    }
+
+    .gradient-btn:hover {
+      opacity: 0.95;
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+    }
+
+    /* Smooth page fade transition */
+    .fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Toast Notification */
+    #toast {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+  </style>
+
+  <!-- Google AdSense Script Placeholder -->
+  <!-- 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script> 
+  -->
+</head>
+<body class="flex justify-center items-center min-h-screen bg-slate-950">
+
+  <!-- Mobile-First Container (Max-width: 480px) -->
+  <div id="app" class="w-full max-w-[480px] min-h-screen bg-[#070b14] text-slate-100 flex flex-col relative shadow-2xl border-x border-slate-800/60 overflow-y-auto overflow-x-hidden">
+    
+    <!-- Header Bar -->
+    <header class="w-full py-4 px-5 flex items-center justify-between border-b border-slate-800/80 bg-[#070b14]/90 backdrop-blur sticky top-0 z-30">
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="showIntroScreen()">
+        <span class="w-8 h-8 rounded-lg gradient-btn flex items-center justify-center text-white font-black font-outfit text-sm shadow-md">M</span>
+        <span class="font-outfit font-extrabold text-lg tracking-wider text-slate-100">MYTI <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">JOB</span></span>
+      </div>
+      <div class="text-xs text-slate-400 font-medium">
+        <i class="fa-solid fa-bolt text-amber-400 mr-1"></i>무료 테스트
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 flex flex-col p-4 md:p-5 relative">
+      
+      <!-- ================= 1. INTRO SCREEN ================= -->
+      <section id="intro-screen" class="flex-1 flex flex-col justify-between fade-in space-y-6">
+        
+        <!-- Top Ad Placeholder -->
+        <div class="adsense-placeholder w-full py-2.5 px-4 rounded-xl flex items-center justify-center text-xs text-slate-400 text-center">
+          <i class="fa-solid fa-rectangle-ad text-purple-400 mr-2"></i>
+          <span>[AD] Google AdSense 상단 디스플레이 광고</span>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="text-center space-y-4 pt-2">
+          <div class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-medium shadow-sm animate-pulse-slow">
+            <span class="w-2 h-2 rounded-full bg-purple-400 mr-2"></span>
+            <span>이미 124,582명의 취준생·이직러 참여!</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">
+            내 안의 취업/이직<br>
+            <span class="gradient-text text-3xl sm:text-4xl">페르소나 테스트</span>
+          </h1>
+
+          <p class="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
+            나는 면접장에 가면 어떤 캐릭터일까?<br>
+            <span class="text-purple-300 font-medium">12가지 직무 행동 패턴</span>으로 나의 캐릭터 찾기!
+          </p>
+
+          <div class="flex justify-center items-center space-x-3 text-xs text-slate-400 pt-1">
+            <span class="flex items-center"><i class="fa-regular fa-clock text-purple-400 mr-1"></i> 약 1분 30초</span>
+            <span>•</span>
+            <span class="flex items-center"><i class="fa-solid fa-list-check text-purple-400 mr-1"></i> 12문항</span>
+            <span>•</span>
+            <span class="flex items-center"><i class="fa-solid fa-shield-halved text-purple-400 mr-1"></i> 회원가입 없음</span>
+          </div>
+        </div>
+
+        <!-- Graphic Illustration Card -->
+        <div class="glass-card p-6 rounded-2xl relative overflow-hidden text-center border border-purple-500/20 shadow-lg">
+          <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-600/20 rounded-full blur-2xl"></div>
+          <div class="absolute -left-10 -top-10 w-32 h-32 bg-pink-600/20 rounded-full blur-2xl"></div>
+          
+          <div class="relative z-10 space-y-3">
+            <div class="text-5xl animate-bounce-subtle">💼</div>
+            <div class="grid grid-cols-2 gap-2 text-left pt-2 text-xs">
+              <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center">
+                <span class="text-base mr-2">⚡</span>
+                <div>
+                  <div class="font-bold text-slate-200">벼락치기 연금술사</div>
+                  <div class="text-[10px] text-slate-400">ESTP / ENTP</div>
+                </div>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center">
+                <span class="text-base mr-2">🤖</span>
+                <div>
+                  <div class="font-bold text-slate-200">면접장 감성 로봇</div>
+                  <div class="text-[10px] text-slate-400">INFP / INFJ</div>
+                </div>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center">
+                <span class="text-base mr-2">📊</span>
+                <div>
+                  <div class="font-bold text-slate-200">AI급 데이터 수집가</div>
+                  <div class="text-[10px] text-slate-400">ISTJ / ESTJ</div>
+                </div>
+              </div>
+              <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center">
+                <span class="text-base mr-2">🔥</span>
+                <div>
+                  <div class="font-bold text-slate-200">무한긍정 멘탈 갑</div>
+                  <div class="text-[10px] text-slate-400">ENFP / ESFP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Start CTA Button -->
+        <div class="space-y-3 pt-2">
+          <button onclick="startQuiz()" class="w-full py-4 px-6 rounded-2xl font-extrabold text-lg text-white gradient-btn shadow-lg shadow-purple-600/30 transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+            <span>테스트 시작하기</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Bottom Ad Placeholder -->
+        <div class="adsense-placeholder w-full py-4 px-4 rounded-xl flex items-center justify-center text-xs text-slate-400 text-center">
+          <i class="fa-solid fa-rectangle-ad text-purple-400 mr-2"></i>
+          <span>[AD] Google AdSense 하단 광고 영역</span>
+        </div>
+
+      </section>
+
+      <!-- ================= 2. QUIZ SCREEN ================= -->
+      <section id="quiz-screen" class="hidden flex-1 flex flex-col justify-between fade-in space-y-5">
+        
+        <!-- Progress Bar & Step Indicator -->
+        <div class="space-y-2 pt-1">
+          <div class="flex justify-between items-center text-xs font-bold">
+            <span id="question-category" class="px-2.5 py-0.5 rounded-full bg-purple-900/50 text-purple-300 border border-purple-500/30">E vs I (외향/내향)</span>
+            <span class="text-purple-400 font-outfit"><span id="current-step-text" class="text-slate-100 text-sm">1</span> / 12</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
+            <div id="progress-bar" class="h-full gradient-btn rounded-full transition-all duration-300" style="width: 8.33%;"></div>
+          </div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="glass-card p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4 my-auto">
+          <div class="inline-block px-2.5 py-1 rounded-md bg-slate-900 text-purple-400 text-xs font-bold font-outfit" id="q-num-tag">
+            Q1
+          </div>
+          <h2 id="question-text" class="text-lg sm:text-xl font-bold text-slate-100 leading-snug">
+            질문 텍스트가 여기에 표시됩니다.
+          </h2>
+        </div>
+
+        <!-- Choice Option Buttons -->
+        <div class="space-y-3">
+          <button onclick="selectOption('A')" class="glass-card-interactive w-full p-4 rounded-2xl text-left flex items-start space-x-3 group">
+            <span class="w-7 h-7 rounded-xl bg-purple-900/60 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-sm shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">A</span>
+            <span id="option-a-text" class="text-sm sm:text-base text-slate-200 font-medium pt-0.5">선택지 A 내용</span>
+          </button>
+
+          <button onclick="selectOption('B')" class="glass-card-interactive w-full p-4 rounded-2xl text-left flex items-start space-x-3 group">
+            <span class="w-7 h-7 rounded-xl bg-purple-900/60 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-sm shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">B</span>
+            <span id="option-b-text" class="text-sm sm:text-base text-slate-200 font-medium pt-0.5">선택지 B 내용</span>
+          </button>
+        </div>
+
+        <!-- Fixed Quiz Bottom Ad Placeholder -->
+        <div class="adsense-placeholder w-full py-3 px-4 rounded-xl flex items-center justify-center text-xs text-slate-400 text-center mt-2">
+          <i class="fa-solid fa-rectangle-ad text-purple-400 mr-2"></i>
+          <span>[AD] Google AdSense 고정형 배너 광고</span>
+        </div>
+
+      </section>
+
+      <!-- ================= 3. LOADING SCREEN ================= -->
+      <section id="loading-screen" class="hidden flex-1 flex flex-col items-center justify-between fade-in text-center py-6 space-y-6">
+        
+        <div class="space-y-2 pt-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-100">
+            나의 취업/이직 페르소나 분석 중...
+          </h2>
+          <p id="loading-subtitle" class="text-xs text-purple-400 font-medium animate-pulse">
+            지원 성향 데이터 매칭 중 (3초)
+          </p>
+        </div>
+
+        <!-- Loading Animated Spinner -->
+        <div class="relative w-24 h-24 flex items-center justify-center my-4">
+          <div class="absolute inset-0 rounded-full border-4 border-purple-900/40 border-t-purple-500 animate-spin"></div>
+          <div class="w-16 h-16 rounded-full bg-purple-950/80 flex items-center justify-center text-2xl text-purple-300 shadow-inner">
+            <i class="fa-solid fa-brain animate-pulse"></i>
+          </div>
+        </div>
+
+        <!-- Large Center Interstitial Ad Placeholder -->
+        <div class="w-full space-y-2 my-auto">
+          <div class="adsense-placeholder w-full h-56 rounded-2xl flex flex-col items-center justify-center p-4 text-slate-400 text-center border-2 border-dashed border-purple-500/30">
+            <i class="fa-solid fa-rectangle-ad text-3xl text-purple-400 mb-2"></i>
+            <span class="font-bold text-sm text-slate-300">[AD] Google AdSense 대형 전면 광고 영역</span>
+            <span class="text-[11px] text-slate-500 mt-1">분석이 완료되면 자동으로 결과 페이지로 이동합니다.</span>
+          </div>
+        </div>
+
+        <div class="text-[11px] text-slate-500">
+          MYTI Engine v2.4 • Client-side Instant Analysis
+        </div>
+
+      </section>
+
+      <!-- ================= 4. RESULT SCREEN ================= -->
+      <section id="result-screen" class="hidden flex-1 flex flex-col fade-in space-y-6 pb-6">
+        
+        <!-- Header Info -->
+        <div class="text-center space-y-2 pt-2">
+          <div class="inline-block px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-bold font-outfit tracking-widest uppercase">
+            YOUR JOB PERSONA • <span id="res-mbti">ESTP</span>
+          </div>
+          <h1 id="res-title" class="text-2xl sm:text-3xl font-extrabold text-slate-100 gradient-text">
+            벼락치기의 연금술사
+          </h1>
+          <p id="res-tagline" class="text-sm font-semibold text-slate-300 bg-slate-900/80 py-2 px-4 rounded-xl border border-slate-800 italic">
+            "마감 1시간 전이 진짜 내 실력이다."
+          </p>
+        </div>
+
+        <!-- Main Character Card -->
+        <div class="glass-card p-5 rounded-2xl border border-purple-500/20 shadow-xl space-y-5 relative overflow-hidden">
+          
+          <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
+            <div id="res-icon" class="text-4xl w-14 h-14 rounded-2xl bg-purple-900/40 border border-purple-500/30 flex items-center justify-center shrink-0">
+              ⚡
+            </div>
+            <div>
+              <div class="text-xs text-slate-400">성향 분석 리포트</div>
+              <div id="res-sub-desc" class="text-xs font-medium text-purple-300 mt-0.5">실전형 순발력과 강력한 마감 몰입도의 소유자</div>
+            </div>
+          </div>
+
+          <!-- Fact Attack List -->
+          <div class="space-y-2.5">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-pink-400 flex items-center">
+              <i class="fa-solid fa-fire text-pink-500 mr-1.5"></i> 팩폭 특징 3가지
+            </h3>
+            <ul id="res-facts" class="space-y-2 text-xs text-slate-300 font-medium">
+              <!-- Rendered dynamically -->
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Match Cards (Best / Worst) -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="glass-card p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-950/10 space-y-1">
+            <div class="text-[11px] font-bold text-emerald-400 flex items-center">
+              <i class="fa-solid fa-heart mr-1"></i> 환상의 짝꿍
+            </div>
+            <div id="res-best-name" class="font-bold text-sm text-slate-100">ISFJ</div>
+            <div id="res-best-desc" class="text-[10px] text-slate-400">꼼꼼한 서포터 지원자</div>
+          </div>
+
+          <div class="glass-card p-3.5 rounded-xl border border-rose-500/20 bg-rose-950/10 space-y-1">
+            <div class="text-[11px] font-bold text-rose-400 flex items-center">
+              <i class="fa-solid fa-skull mr-1"></i> 환장의 짝꿍
+            </div>
+            <div id="res-worst-name" class="font-bold text-sm text-slate-100">INFP</div>
+            <div id="res-worst-desc" class="text-[10px] text-slate-400">면접장의 감성 로봇</div>
+          </div>
+        </div>
+
+        <!-- Result Ad Placeholder -->
+        <div class="adsense-placeholder w-full py-3 px-4 rounded-xl flex items-center justify-center text-xs text-slate-400 text-center">
+          <i class="fa-solid fa-rectangle-ad text-purple-400 mr-2"></i>
+          <span>[AD] Google AdSense 결과 맞춤형 광고</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-2.5 pt-1">
+          <!-- Share Button -->
+          <button onclick="shareResult()" class="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-slate-100 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-share-nodes text-purple-400"></i>
+            <span>카카오톡 / 인스타 결과 공유하기</span>
+          </button>
+
+          <!-- Retest Button -->
+          <button onclick="restartQuiz()" class="w-full py-3 px-4 rounded-xl font-medium text-xs text-slate-400 hover:text-slate-200 transition-colors flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>테스트 다시 하기</span>
+          </button>
+        </div>
+
+        <!-- CRITICAL MONETIZATION & LANDING CTA BUTTON -->
+        <div class="pt-4 border-t border-slate-800/80">
+          <a href="https://draft-ethan.vercel.app/" target="_blank" rel="noopener noreferrer" class="block group">
+            <div class="w-full p-4 rounded-2xl bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 p-[2px] shadow-xl shadow-purple-900/30 transform transition hover:-translate-y-0.5">
+              <div class="w-full h-full bg-slate-950 p-4 rounded-[14px] flex items-center justify-between group-hover:bg-slate-900/90 transition-colors">
+                <div class="space-y-1 text-left">
+                  <div class="inline-flex items-center text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    🔥 3초 무료 AI 자소서 검수
+                  </div>
+                  <div class="text-sm font-black text-white group-hover:text-amber-300 transition-colors">
+                    🎁 내 진짜 자소서 점수가 궁금하다면?
+                  </div>
+                  <div class="text-[11px] text-slate-400">
+                    인공지능 팩폭 진단받고 서류 합격률 UP
+                  </div>
+                </div>
+                <div class="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center text-white shrink-0 shadow-md group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-4 px-5 text-center text-[11px] text-slate-600 border-t border-slate-900 bg-[#050811]">
+      <p>© 2026 MYTI Job Persona Test. 100% Client-side JS Service.</p>
+      <p class="mt-0.5 text-[10px] text-slate-700">Powered by <a href="https://draft-ethan.vercel.app/" target="_blank" rel="noopener noreferrer" class="underline text-slate-500 hover:text-slate-400">draft_ethan</a></p>
+    </footer>
+
+    <!-- Toast Notification Overlay -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-full bg-purple-900/90 border border-purple-400/50 text-white text-xs font-bold shadow-2xl opacity-0 pointer-events-none z-50 flex items-center space-x-2">
+      <i class="fa-solid fa-check text-emerald-400"></i>
+      <span id="toast-msg">링크가 클립보드에 복사되었습니다!</span>
+    </div>
+
+  </div>
+
+  <!-- APPLICATION LOGIC (Vanilla JS) -->
+  <script>
+    // 1. QUESTION DATASET (12 Questions)
+    const questions = [
+      // Q1-Q3: E vs I
+      {
+        axis: "EI",
+        category: "E vs I (외향/내향)",
+        q: "Q1. 합격률을 높이기 위해 스터디를 모집한다는 글을 보았다.",
+        a: { text: '"혼자 하면 루즈해지지!" 바로 스터디에 참여한다.', trait: "E" },
+        b: { text: '"남 신경 쓰이고 피곤해..." 혼자 조용히 준비한다.', trait: "I" }
+      },
+      {
+        axis: "EI",
+        category: "E vs I (외향/내향)",
+        q: "Q2. 면접장에 도착했는데 대기실 분위기가 너무 정막하다.",
+        a: { text: "옆 지원자에게 살갑게 말을 걸어 분위기를 푼다.", trait: "E" },
+        b: { text: "대본을 보며 '제발 나한테 말 걸지 마라' 기도한다.", trait: "I" }
+      },
+      {
+        axis: "EI",
+        category: "E vs I (외향/내향)",
+        q: "Q3. 드디어 원하는 회사에 최종 합격했다!",
+        a: { text: "인스타 업로드 + 친구 카톡방에 소문내며 벼락 파티를 연다.", trait: "E" },
+        b: { text: "친한 사람에게만 알리고 집에서 차분히 쉰다.", trait: "I" }
+      },
+
+      // Q4-Q6: S vs N
+      {
+        axis: "SN",
+        category: "S vs N (감각/직관)",
+        q: "Q4. '본인의 장단점' 항목을 작성할 때 나는?",
+        a: { text: "실제로 경험했던 구체적인 동아리/알바 성과와 숫자 위주로 적는다.", trait: "S" },
+        b: { text: "나의 성장 가능성, 비전, 추상적인 가치관과 철학을 중심으로 적는다.", trait: "N" }
+      },
+      {
+        axis: "SN",
+        category: "S vs N (감각/직관)",
+        q: "Q5. 채용 공고를 볼 때 가장 먼저 눈에 들어오는 것은?",
+        a: { text: "연봉, 근무지, 복리후생, 정확한 담당 업무(R&R)", trait: "S" },
+        b: { text: "회사의 미래 성장성, 기업 문화, 서비스의 혁신성", trait: "N" }
+      },
+      {
+        axis: "SN",
+        category: "S vs N (감각/직관)",
+        q: "Q6. 면접 전날, 머릿속을 채우는 생각은?",
+        a: { text: "'1분 자기소개, 지원동기, 마지막 한마디 복습하자.'", trait: "S" },
+        b: { text: "'만약 면접관이 갑자기 춤추라고 하면 어쩌지?' 온가지 꼬리물기 상상", trait: "N" }
+      },
+
+      // Q7-Q9: T vs F
+      {
+        axis: "TF",
+        category: "T vs F (사고/감정)",
+        q: "Q7. 친구에게 내 자소서를 보여줬더니 \"글이 좀 어색해\"라고 한다.",
+        a: { text: '"어느 문장? 구체적으로 지적해 줘. 논리가 안 맞아?"', trait: "T" },
+        b: { text: '(속으로 섭섭...) "아 그래? 고마워..." 하며 상처받는다.', trait: "F" }
+      },
+      {
+        axis: "TF",
+        category: "T vs F (사고/감정)",
+        q: "Q8. 면접관이 \"우리 회사 오려고 무슨 노력 하셨어요?\"라고 물었을 때?",
+        a: { text: "직무 관련 자격증, 프로젝트 등 객관적 결과물을 열거한다.", trait: "T" },
+        b: { text: "이 회사에 대한 나의 진심과 열정, 간절했던 계기를 어필한다.", trait: "F" }
+      },
+      {
+        axis: "TF",
+        category: "T vs F (사고/감정)",
+        q: "Q9. \"아쉽게도 합격 소식을 전하지 못하게 되었습니다\" 문자를 받았다.",
+        a: { text: "'어느 부분이 부족했지?' 서류나 면접 답변 복기부터 시작한다.", trait: "T" },
+        b: { text: "'나 진짜 열심히 했는데...' 감정 정리가 안 돼 우울해한다.", trait: "F" }
+      },
+
+      // Q10-Q12: J vs P
+      {
+        axis: "JP",
+        category: "J vs P (판단/인식)",
+        q: "Q10. 자소서 마감일이 일주일 남아있을 때 나의 모습은?",
+        a: { text: "요일별로 작성할 문항을 나눠두고 차근차근 완성해 나간다.", trait: "J" },
+        b: { text: "일단 놀다가 마감 D-1, D-Day에 초인의 집중력을 발휘한다.", trait: "P" }
+      },
+      {
+        axis: "JP",
+        category: "J vs P (판단/인식)",
+        q: "Q11. 면접 답변 준비 스타일은?",
+        a: { text: "예상 질문과 답변 대본을 토시 하나까지 스크립트로 짜둔다.", trait: "J" },
+        b: { text: "키워드 몇 개만 머릿속에 넣어두고 가서 임기응변으로 말한다.", trait: "P" }
+      },
+      {
+        axis: "JP",
+        category: "J vs P (판단/인식)",
+        q: "Q12. 이번 달 나의 취업/이직 활동 계획은?",
+        a: { text: "캘린더에 기업별 마감일과 제출 목록이 깔끔하게 정돈되어 있다.", trait: "J" },
+        b: { text: "에브리타임이나 톡방에 공고 뜨면 그때그때 지원한다.", trait: "P" }
+      }
+    ];
+
+    // 2. ALL 16 MBTI RESULT DATASET
+    const mytiResults = {
+      ESTP: {
+        title: "벼락치기의 연금술사",
+        tagline: '"마감 1시간 전이 진짜 내 실력이다."',
+        icon: "⚡",
+        subDesc: "실전 순발력과 강력한 위기 관리 능력의 소유자",
+        facts: [
+          "계획표 짜는 시간조차 아까워서 일단 지원 버튼부터 누름",
+          "면접장 돌발 질문에 대본 없이 100% 순발력과 드립으로 위기 탈출",
+          "합격하면 실력, 불합격하면 '이 회사가 날 담기엔 그릇이 작았네'"
+        ],
+        best: { code: "ISFJ", desc: "꼼꼼한 서포터 지원자" },
+        worst: { code: "INFP", desc: "면접장의 감성 로봇" }
+      },
+      ENTP: {
+        title: "아이디어 폭주 자소서",
+        tagline: '"내 자소서는 혁신 그 자체, 면접관과 토론 승리 가능!"',
+        icon: "💡",
+        subDesc: "창의적인 입담과 직설적인 논리로 무장한 지원자",
+        facts: [
+          "지원동기에 회사 단점 지적하고 개선안 제시하다 면접관 눈동자 흔들림",
+          "자기소개서 쓰다가 혼자 신나서 비즈니스 모델 하나 창업할 기세",
+          "'왜 우리 회사인가요?' 질문에 순간 당황하지만 화려한 혀놀림으로 포장 완료"
+        ],
+        best: { code: "INFJ", desc: "취준계의 은둔 신선" },
+        worst: { code: "ISFJ", desc: "헌신적 성실의 아이콘" }
+      },
+      INFP: {
+        title: "면접장의 감성 로봇",
+        tagline: '"머릿속엔 대본이 있었는데요, 없어졌습니다."',
+        icon: "🤖",
+        subDesc: "풍부한 가치관과 공감 능력을 가진 진정성형 지원자",
+        facts: [
+          "면접관의 따뜻한 눈빛 한 번에 속으로 이미 이 회사 10년 장기근속함",
+          "'압박 면접' 들어오면 속으로 울면서 멘탈 겉바속촉 바삭해짐",
+          "탈락 통보 받으면 '내가 문제인가' 밤새 자책하다가 3일 뒤 부활"
+        ],
+        best: { code: "ENFJ", desc: "비전 제시 리더 지원자" },
+        worst: { code: "ESTP", desc: "벼락치기의 연금술사" }
+      },
+      INFJ: {
+        title: "취준계의 은둔 신선",
+        tagline: '"회사 가치관과 내 영혼의 싱크로율을 분석 중입니다."',
+        icon: "🔮",
+        subDesc: "깊이 있는 통찰력과 명확한 소신을 품은 비밀병기",
+        facts: [
+          "기업 리서치만 3일 동안 해서 회사 대표보다 더 상세한 비전 파악",
+          "겉으로는 조용하고 차분하지만 자소서 문장 하나하나에 뼈가 있음",
+          "면접장에서 나를 증명하는 것보다 면접관의 성향을 읽고 있는 자신을 발견함"
+        ],
+        best: { code: "ENTP", desc: "아이디어 폭주 자소서" },
+        worst: { code: "ESTP", desc: "벼락치기의 연금술사" }
+      },
+      ISTJ: {
+        title: "AI급 데이터 수집가",
+        tagline: '"감정 빼고 팩트와 숫자로 승부한다."',
+        icon: "📊",
+        subDesc: "철두철미한 준비성과 데이터 중심의 완벽 주의자",
+        facts: [
+          "자소서 경험 항목에 수치, 데이터, 증빙 자료 완벽 정돈",
+          "예상 질문 100개 스크립트 엑셀 파일로 세분화 완료",
+          "돌발 질문 들어오면 순간 입력 오류 나지만 정석대로 무난하게 통과"
+        ],
+        best: { code: "ESFP", desc: "면접장 신스틸러" },
+        worst: { code: "ENFP", desc: "무한긍정 멘탈 갑 지원자" }
+      },
+      ESTJ: {
+        title: "전략 기획 총괄 지원자",
+        tagline: '"내가 합격하면 이 팀 프로젝트 싹 정돈해드립니다."',
+        icon: "👑",
+        subDesc: "강력한 리더십과 리얼 커리어 실무형 지원자",
+        facts: [
+          "면접장에서 이미 팀장 포스로 리더십과 실행력 어필",
+          "마감일 일주일 전 자소서 제출 완료하고 다음 공고 준비 중",
+          "스터디 모집하면 본인이 자연스럽게 리더 맡아서 분위기 주도함"
+        ],
+        best: { code: "ISFP", desc: "평화주의 숨은 실력자" },
+        worst: { code: "INFP", desc: "면접장의 감성 로봇" }
+      },
+      ENFP: {
+        title: "무한긍정 멘탈 갑 지원자",
+        tagline: '"탈락도 성장의 과정! 다음 회사 드루와!"',
+        icon: "🔥",
+        subDesc: "지치지 않는 에너지를 가진 분위기 메이커",
+        facts: [
+          "서류 50개 쓰면서 50가지 새로운 꿈과 미래를 상상함",
+          "면접장에서 특유의 해맑은 에너지로 면접관 아빠미소 만듦",
+          "서류 떨어져도 '나를 놓치다니 이 회사 손해지 ㅋ' 하고 5분 만에 훌훌 털어냄"
+        ],
+        best: { code: "INTJ", desc: "완벽주의 전략 마스터" },
+        worst: { code: "ISTJ", desc: "AI급 데이터 수집가" }
+      },
+      ESFP: {
+        title: "면접장 신스틸러",
+        tagline: '"어색한 면접 대기실? 분위기 메이커 등장!"',
+        icon: "🌟",
+        subDesc: "친화력 100%의 실전 인싸형 지원자",
+        facts: [
+          "대기실의 정적을 못 견디고 다른 지원자한테 '떨리시죠?' 말검",
+          "자기소개할 때 과하지 않게 인간미 넘치는 호감형 필살기 발사",
+          "분위기 타서 혼자 신나서 필요 이상으로 TMI 방출할 위험 있음"
+        ],
+        best: { code: "ISTJ", desc: "AI급 데이터 수집가" },
+        worst: { code: "INTJ", desc: "완벽주의 전략 마스터" }
+      },
+      INTJ: {
+        title: "완벽주의 전략 마스터",
+        tagline: '"합격은 이미 계산된 시나리오 안에 있다."',
+        icon: "🎯",
+        subDesc: "기업을 파악하고 공략법을 설계하는 철두철미한 지략가",
+        facts: [
+          "회사의 5년 후 마켓 점유율 분석해서 역으로 면접관 질문 준비",
+          "비효율적인 자소서 질문 보면 혼자 속으로 혀를 차며 작성함",
+          "면접관의 어설픈 꼬리질문도 논리적으로 다 막아내는 철벽 수비"
+        ],
+        best: { code: "ENFP", desc: "무한긍정 멘탈 갑 지원자" },
+        worst: { code: "ESFP", desc: "면접장 신스틸러" }
+      },
+      INTP: {
+        title: "디테일 고찰 파헤치기형",
+        tagline: '"회사 분석하다 질문에 꽂혀 논문 쓸 기세."',
+        icon: "🧪",
+        subDesc: "본질을 탐구하고 호기심으로 무장한 데이터 분석가",
+        facts: [
+          "지원 동기 쓰다가 회사의 근본적인 기술적 문제점에 꽂혀서 밤샘",
+          "뻔한 자기소개서 질문에 본질적인 질문 던지고 싶어 입이 근질거림",
+          "면접장에서 혼자 머릿속으로 깊게 생각하느라 정적 3초 흐름"
+        ],
+        best: { code: "ENTJ", desc: "차기 CEO 면접자" },
+        worst: { code: "ESFJ", desc: "친화력 200% 조직 밀착형" }
+      },
+      ENTJ: {
+        title: "차기 CEO 면접자",
+        tagline: '"면접 보러 왔습니다. 아, 제가 평가하는 건가요?"',
+        icon: "👔",
+        subDesc: "목표 지향적이고 압도적인 비전을 어필하는 리더",
+        facts: [
+          "압박 면접 받으면 속으로 '오냐 승부다' 하고 눈에 힘 들어감",
+          "입사 후 3년, 5년, 10년 로드맵이 대표이사 수준으로 명확함",
+          "자신감 넘치는 태도로 면접장을 리드하여 면접관을 당황시킴"
+        ],
+        best: { code: "INTP", desc: "디테일 고찰 파헤치기형" },
+        worst: { code: "ISFP", desc: "평화주의 숨은 실력자" }
+      },
+      ISFP: {
+        title: "평화주의 숨은 실력자",
+        tagline: '"튀지 않고 묵묵히 내 할 일 다 하겠습니다."',
+        icon: "🎨",
+        subDesc: "조용하지만 실속 있고 유연하게 적응하는 지원자",
+        facts: [
+          "자기 PR 하라고 하면 내 자랑하는 것 같아 쑥스러움 극치",
+          "벼락치기로 자소서 쓰면서 '어떻게든 되겠지' 하고 마감 10분 전 제출",
+          "온화하고 따뜻한 면접 분위기에서 최고의 실력 발휘"
+        ],
+        best: { code: "ESTJ", desc: "전략 기획 총괄 지원자" },
+        worst: { code: "ENTJ", desc: "차기 CEO 면접자" }
+      },
+      ISFJ: {
+        title: "헌신적 성실의 아이콘",
+        tagline: '"팀의 구멍을 메우는 든든한 조용한 지원군."',
+        icon: "🛡️",
+        subDesc: "책임감과 꼼꼼함으로 조직의 신뢰를 받는 서포터",
+        facts: [
+          "이전 조직에서의 세심한 지원 경험과 성실함으로 신뢰 획득",
+          "남을 돋보이게 한 에피소드가 많아서 자기소개서가 은근 따뜻함",
+          "면접 때 떨려서 목소리 살짝 떨리지만 진정성으로 면접관 마음 흔듦"
+        ],
+        best: { code: "ESTP", desc: "벼락치기의 연금술사" },
+        worst: { code: "ENTP", desc: "아이디어 폭주 자소서" }
+      },
+      ESFJ: {
+        title: "친화력 200% 조직 밀착형",
+        tagline: '"어느 팀에 던져져도 1분 만에 적응 완료!"',
+        icon: "🤝",
+        subDesc: "조직 내 온기를 더하고 협동 시너지를 내는 인재",
+        facts: [
+          "자소서에 팀워크, 협동, 소통 에피소드 무한 생성 가능",
+          "면접관의 리액션에 센스 있게 반응하며 호감도 극대화",
+          "불합격하면 나보다 같이 준비한 주변 사람들이 더 아쉬워해 줌"
+        ],
+        best: { code: "ISFP", desc: "평화주의 숨은 실력자" },
+        worst: { code: "INTP", desc: "디테일 고찰 파헤치기형" }
+      },
+      ENFJ: {
+        title: "비전 제시 리더 지원자",
+        tagline: '"우리 함께 이 회사를 위대하게 만듭시다!"',
+        icon: "🌈",
+        subDesc: "상대방을 동기부여하고 사람을 모으는 멘토형 지원자",
+        facts: [
+          "면접에서 팀 내 분위기 형성 및 동기부여 경험을 감동적으로 설명",
+          "자기 일처럼 동료 취준생 자소서 피드백해 주다 본인 거 늦게 씀",
+          "선한 영향력과 특유의 호감형 오라로 면접관 전원 포섭"
+        ],
+        best: { code: "INFP", desc: "면접장의 감성 로봇" },
+        worst: { code: "ISTP", desc: "실전 무심 마이웨이" }
+      },
+      ISTP: {
+        title: "실전 무심 마이웨이",
+        tagline: '"말보다는 결과로 보여드리겠습니다."',
+        icon: "🔧",
+        subDesc: "군더더기 없이 깔끔하게 문제를 해결하는 실무파",
+        facts: [
+          "감정 이입 없는 담백하고 간결한 자소서 문체",
+          "면접에서 핵심만 딱 말하고 입 다물어서 면접관이 추가 질문 유도함",
+          "억지 과장은 질색, 있는 사실 그대로만 깔끔하게 답변"
+        ],
+        best: { code: "ESFJ", desc: "친화력 200% 조직 밀착형" },
+        worst: { code: "ENFJ", desc: "비전 제시 리더 지원자" }
+      }
+    };
+
+    // 3. APPLICATION STATE
+    let currentIdx = 0;
+    let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+    // DOM Elements
+    const introScreen = document.getElementById("intro-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const loadingScreen = document.getElementById("loading-screen");
+    const resultScreen = document.getElementById("result-screen");
+
+    // 4. SCREEN SWITCHING FUNCTIONS
+    function hideAllScreens() {
+      introScreen.classList.add("hidden");
+      quizScreen.classList.add("hidden");
+      loadingScreen.classList.add("hidden");
+      resultScreen.classList.add("hidden");
+    }
+
+    function showIntroScreen() {
+      hideAllScreens();
+      introScreen.classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+
+    function startQuiz() {
+      currentIdx = 0;
+      scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+      hideAllScreens();
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+      window.scrollTo(0, 0);
+    }
+
+    // 5. RENDER QUESTION
+    function renderQuestion() {
+      const q = questions[currentIdx];
+      
+      document.getElementById("current-step-text").innerText = currentIdx + 1;
+      document.getElementById("question-category").innerText = q.category;
+      document.getElementById("q-num-tag").innerText = `Q${currentIdx + 1}`;
+      document.getElementById("question-text").innerText = q.q;
+      
+      document.getElementById("option-a-text").innerText = q.a.text;
+      document.getElementById("option-b-text").innerText = q.b.text;
+
+      const progressPercent = ((currentIdx + 1) / questions.length) * 100;
+      document.getElementById("progress-bar").style.width = `${progressPercent}%`;
+    }
+
+    // 6. SELECT OPTION LOGIC
+    function selectOption(choice) {
+      const q = questions[currentIdx];
+      const selectedTrait = choice === "A" ? q.a.trait : q.b.trait;
+      
+      scores[selectedTrait] += 1;
+
+      if (currentIdx < questions.length - 1) {
+        currentIdx++;
+        // Smooth slide transition effect
+        quizScreen.classList.remove("fade-in");
+        void quizScreen.offsetWidth; // trigger reflow
+        quizScreen.classList.add("fade-in");
+        renderQuestion();
+      } else {
+        processResults();
+      }
+    }
+
+    // 7. RESULT CALCULATION & LOADING
+    function processResults() {
+      hideAllScreens();
+      loadingScreen.classList.remove("hidden");
+      window.scrollTo(0, 0);
+
+      // Loading Subtitle animation cycles
+      const subtitles = [
+        "지원 성향 데이터 매칭 중 (1/3)",
+        "서류 및 면접 멘탈 수치 계산 중 (2/3)",
+        "페르소나 매칭 완료! 결과 생성 중 (3/3)"
+      ];
+      
+      let subIdx = 0;
+      const interval = setInterval(() => {
+        subIdx++;
+        if (subIdx < subtitles.length) {
+          document.getElementById("loading-subtitle").innerText = subtitles[subIdx];
+        }
+      }, 900);
+
+      // Calculate MBTI Code
+      const finalEorI = scores.E >= scores.I ? "E" : "I";
+      const finalSorN = scores.S >= scores.N ? "S" : "N";
+      const finalTorF = scores.T >= scores.F ? "T" : "F";
+      const finalJorP = scores.J >= scores.P ? "J" : "P";
+      const mbtiCode = `${finalEorI}${finalSorN}${finalTorF}${finalJorP}`;
+
+      // 3 Seconds Delay before transitioning to Result
+      setTimeout(() => {
+        clearInterval(interval);
+        showResultScreen(mbtiCode);
+      }, 3000);
+    }
+
+    // 8. SHOW RESULT SCREEN
+    function showResultScreen(mbtiCode) {
+      hideAllScreens();
+      resultScreen.classList.remove("hidden");
+      window.scrollTo(0, 0);
+
+      const res = mytiResults[mbtiCode] || mytiResults["ESTP"];
+
+      document.getElementById("res-mbti").innerText = mbtiCode;
+      document.getElementById("res-title").innerText = res.title;
+      document.getElementById("res-tagline").innerText = res.tagline;
+      document.getElementById("res-icon").innerText = res.icon;
+      document.getElementById("res-sub-desc").innerText = res.subDesc;
+
+      // Render Facts
+      const factsList = document.getElementById("res-facts");
+      factsList.innerHTML = "";
+      res.facts.forEach((fact, i) => {
+        const li = document.createElement("li");
+        li.className = "flex items-start space-x-2 bg-slate-900/50 p-2.5 rounded-lg border border-slate-800/80";
+        li.innerHTML = `
+          <span class="text-purple-400 font-bold font-outfit text-xs shrink-0 mt-0.5">0${i + 1}.</span>
+          <span class="text-slate-200 leading-snug">${fact}</span>
+        `;
+        factsList.appendChild(li);
+      });
+
+      // Render Best / Worst Match
+      document.getElementById("res-best-name").innerText = `${res.best.code}`;
+      document.getElementById("res-best-desc").innerText = res.best.desc;
+      
+      document.getElementById("res-worst-name").innerText = `${res.worst.code}`;
+      document.getElementById("res-worst-desc").innerText = res.worst.desc;
+    }
+
+    // 9. SHARE LOGIC (Web Share API + Copy Link Toast)
+    function shareResult() {
+      const shareData = {
+        title: "내 안의 취업/이직 페르소나 테스트 (MYTI)",
+        text: `나의 취업 페르소나 결과를 확인해보세요! #MYTI #취업MBTI`,
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => {
+          copyToClipboard();
+        });
+      } else {
+        copyToClipboard();
+      }
+    }
+
+    function copyToClipboard() {
+      const tempInput = document.createElement("input");
+      tempInput.value = window.location.href;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      showToast("링크가 클립보드에 복사되었습니다!");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toast-msg");
+      msg.innerText = message;
+      
+      toast.classList.remove("opacity-0", "pointer-events-none");
+      toast.classList.add("opacity-100");
+
+      setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0", "pointer-events-none");
+      }, 2500);
+    }
+
+    function restartQuiz() {
+      startQuiz();
+    }
+  </script>
+</body>
+</html>
