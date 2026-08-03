@@ -885,9 +885,18 @@
       resultScreen.classList.remove("hidden");
       window.scrollTo(0, 0);
 
-      const res = mytiResults[mbtiCode] || mytiResults["ESTP"];
+      const upperMbti = (mbtiCode || "ESTP").toUpperCase();
+      const res = mytiResults[upperMbti] || mytiResults["ESTP"];
 
-      document.getElementById("res-mbti-code").innerText = mbtiCode;
+      // Update URL with ?result=MBTI without page reload
+      try {
+        const shareUrl = `${window.location.origin}${window.location.pathname}?result=${upperMbti}`;
+        window.history.replaceState({ mbti: upperMbti }, "", shareUrl);
+      } catch (e) {
+        console.log(e);
+      }
+
+      document.getElementById("res-mbti-code").innerText = upperMbti;
       document.getElementById("res-title").innerText = res.title;
       document.getElementById("res-tagline").innerText = res.tagline;
       document.getElementById("res-icon").innerText = res.icon;
@@ -915,44 +924,53 @@
     }
 
     // 9. SHARE LOGIC (KakaoTalk + Web Share API + Copy Link Toast)
+    function getShareUrl() {
+      const mbtiCode = document.getElementById("res-mbti-code").innerText || "ESTP";
+      return `${window.location.origin}${window.location.pathname}?result=${mbtiCode}`;
+    }
+
     function shareKakaoTalk() {
-      const currentUrl = window.location.href;
+      const targetUrl = getShareUrl();
       const mbtiCode = document.getElementById("res-mbti-code").innerText;
       const title = document.getElementById("res-title").innerText;
-      const text = `[MYTI 취업 페르소나 테스트]\n나의 결과: ${mbtiCode} - ${title}\n나의 취업 페르소나를 확인해보세요!`;
+      const text = `[MYTI 취업 페르소나 결과]\n나의 결과: ${mbtiCode} (${title})\n당신의 취업 페르소나도 확인해보세요!`;
 
       if (navigator.share) {
         navigator.share({
           title: "MYTI - 취업/이직 페르소나 테스트",
           text: text,
-          url: currentUrl
+          url: targetUrl
         }).catch(() => {
-          copyToClipboard("카카오톡 공유 링크가 복사되었습니다!");
+          copyToClipboard(targetUrl, "카카오톡 공유 링크가 복사되었습니다!");
         });
       } else {
-        copyToClipboard("카카오톡 공유 링크가 복사되었습니다!");
+        copyToClipboard(targetUrl, "카카오톡 공유 링크가 복사되었습니다!");
       }
     }
 
     function shareResult() {
+      const targetUrl = getShareUrl();
+      const mbtiCode = document.getElementById("res-mbti-code").innerText;
+      const title = document.getElementById("res-title").innerText;
       const shareData = {
         title: "내 안의 취업/이직 페르소나 테스트 (MYTI)",
-        text: `나의 취업 페르소나 결과를 확인해보세요! #MYTI #취업MBTI`,
-        url: window.location.href
+        text: `나의 취업 페르소나는 ${mbtiCode} [${title}]! 너의 페르소나도 테스트해봐! #MYTI`,
+        url: targetUrl
       };
 
       if (navigator.share) {
         navigator.share(shareData).catch(() => {
-          copyToClipboard("링크가 클립보드에 복사되었습니다!");
+          copyToClipboard(targetUrl, "결과 링크가 클립보드에 복사되었습니다!");
         });
       } else {
-        copyToClipboard("링크가 클립보드에 복사되었습니다!");
+        copyToClipboard(targetUrl, "결과 링크가 클립보드에 복사되었습니다!");
       }
     }
 
-    function copyToClipboard(msg = "링크가 클립보드에 복사되었습니다!") {
+    function copyToClipboard(url, msg = "링크가 클립보드에 복사되었습니다!") {
+      const targetUrl = url || getShareUrl();
       const tempInput = document.createElement("input");
-      tempInput.value = window.location.href;
+      tempInput.value = targetUrl;
       document.body.appendChild(tempInput);
       tempInput.select();
       document.execCommand("copy");
@@ -976,8 +994,23 @@
     }
 
     function restartQuiz() {
+      // Clear URL parameter when restarting
+      try {
+        const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+        window.history.replaceState({}, "", cleanUrl);
+      } catch (e) {}
       startQuiz();
     }
+
+    // 10. ON LOAD DEEP-LINKING CHECK
+    window.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sharedResult = urlParams.get("result");
+
+      if (sharedResult && mytiResults[sharedResult.toUpperCase()]) {
+        showResultScreen(sharedResult.toUpperCase());
+      }
+    });
   </script>
 </body>
 </html>
