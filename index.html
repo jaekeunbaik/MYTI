@@ -10,22 +10,41 @@
      crossorigin="anonymous"></script>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="나는 면접장에 가면 어떤 캐릭터일까? 12문항으로 알아보는 100% 무료 취업/이직 MBTI 심리테스트! 내 맞춤 페르소나와 팩폭 분석을 확인하세요.">
-  <meta name="keywords" content="MBTI테스트, 취업MBTI, 이직테스트, 면접성향테스트, 자소서테스트, MYTI, draft_ethan">
+  <meta name="description" content="나는 면접장에 가면 어떤 캐릭터일까? 12문항으로 알아보는 100% 무료 취업/이직 MBTI 심리테스트! 16가지 직무 페르소나 및 자소서, 면접 성향 팩폭 분석을 확인하세요.">
+  <meta name="keywords" content="MBTI테스트, 취업MBTI, 이직테스트, 면접성향테스트, 자소서테스트, MYTI, draft_ethan, 취업페르소나">
   <meta name="author" content="MYTI">
+  <link rel="canonical" href="https://myti-five.vercel.app">
   
   <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://myti-job-test.vercel.app">
+  <meta property="og:url" content="https://myti-five.vercel.app">
   <meta property="og:title" content="내 안의 취업/이직 페르소나 테스트 (MYTI)">
-  <meta property="og:description" content="나는 면접장에 가면 어떤 캐릭터일까? (소요시간: 1분 30초) 지금 내 페르소나를 확인해보세요!">
+  <meta property="og:description" content="나는 면접장에 가면 어떤 캐릭터일까? 16가지 직무 성향 및 면접 꿀팁 종합 백과사전">
   <meta property="og:image" content="./og-image.png">
   
   <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="내 안의 취업/이직 페르소나 테스트 (MYTI)">
-  <meta name="twitter:description" content="나는 면접장에 가면 어떤 캐릭터일까? 1분 30초 취업/이직 MBTI 심리테스트">
+  <meta name="twitter:description" content="나는 면접장에 가면 어떤 캐릭터일까? 1분 30초 취업/이직 MBTI 심리테스트 및 16가지 직무 성향 가이드">
   <meta name="twitter:image" content="./og-image.png">
+
+  <!-- Schema.org Structured Data for Search Engine & AdSense Crawler -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "MYTI - 취업/이직 페르소나 테스트",
+    "url": "https://myti-five.vercel.app",
+    "description": "12문항으로 나의 면접 성향, 직무 행동 패턴, 팩폭 자소서 팁을 100% 무료 분석하는 진단 서비스",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "KRW"
+    }
+  }
+  </script>
 
   <!-- Google Fonts & Tailwind CSS CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,10 +210,13 @@
       <!-- ================= 1. INTRO SCREEN ================= -->
       <section id="intro-screen" class="flex-1 flex flex-col justify-between fade-in space-y-6">
         
-        <!-- Top Ad Placeholder -->
-        <div class="adsense-placeholder w-full py-2.5 px-4 rounded-xl flex items-center justify-center text-xs text-slate-500 text-center font-medium">
-          <i class="fa-solid fa-rectangle-ad text-purple-600 mr-2"></i>
-          <span>[AD] Google AdSense 상단 디스플레이 광고</span>
+        <!-- Top Ad Container (Compliant Standard Ad Unit) -->
+        <div class="w-full min-h-[50px] bg-slate-50 border border-slate-200/60 rounded-xl flex items-center justify-center overflow-hidden">
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; text-align:center;"
+               data-ad-client="ca-pub-4403789108346139"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
         </div>
 
         <!-- Hero Content -->
@@ -263,13 +285,118 @@
           </button>
         </div>
 
-        <!-- Bottom Ad Placeholder -->
-        <div class="adsense-placeholder w-full py-4 px-4 rounded-xl flex items-center justify-center text-xs text-slate-500 text-center font-medium">
-          <i class="fa-solid fa-rectangle-ad text-purple-600 mr-2"></i>
-          <span>[AD] Google AdSense 하단 광고 영역</span>
+        <!-- RICH PUBLISHER CONTENT: 16 MBTI CAREER PERSONA ENCYCLOPEDIA SECTION -->
+        <article class="w-full border-t border-slate-200/80 pt-6 mt-4 space-y-4 text-left">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">📚</span>
+            <h2 class="text-base font-black text-slate-900">MYTI 16가지 취업/이직 페르소나 직무 가이드</h2>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            MYTI 취업 페르소나 심리테스트는 MBTI 16가지 성향 지표를 바탕으로 지원자의 면접 행동 양식, 자기소개서 작성 스타일, 조직 적응력 및 직무 강점을 정밀 분석합니다. 아래 16가지 성향 가이드를 통해 나만의 취업 경쟁력을 파악해보세요.
+          </p>
+
+          <details class="group bg-white rounded-xl border border-slate-200 p-3.5 space-y-3 text-xs shadow-xs">
+            <summary class="font-extrabold text-purple-800 cursor-pointer flex justify-between items-center select-none">
+              <span>📖 16가지 취업/이직 페르소나 전체 보기 (클릭)</span>
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <div class="grid grid-cols-1 gap-3 pt-3 text-slate-700 leading-normal">
+              
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">1. ESTP - 벼락치기의 연금술사 ⚡</h3>
+                <p class="mt-1 text-[11px]">순발력과 위기관리 능력이 뛰어난 지원자입니다. 마감 직전 최상의 몰입도를 보이며 면접장 돌발 질문에도 대본 없이 재치있게 위기를 탈출합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">2. ENTP - 아이디어 폭주 자소서 💡</h3>
+                <p class="mt-1 text-[11px]">창의적인 입담과 직설적인 논리로 무장했습니다. 지원동기에 차별화된 비즈니스 개혁안을 제시하여 면접관의 주목을 받는 전략가형 인재입니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">3. INFP - 면접장의 감성 로봇 🤖</h3>
+                <p class="mt-1 text-[11px]">깊은 진정성과 솔직함을 가진 지원자입니다. 진심이 담긴 스토리텔링에 강하며, 면접관과의 감정적 교감을 중요시합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">4. INFJ - 취준계의 은둔 신선 🔮</h3>
+                <p class="mt-1 text-[11px]">기업의 정체성과 비전을 사전에 철저히 파악하는 통찰력 깊은 지원자입니다. 자기소개서에 차분하면서도 명확한 소신을 담아냅니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">5. ISTJ - AI급 데이터 수집가 📊</h3>
+                <p class="mt-1 text-[11px]">수치와 객관적 성과로 승부하는 철두철미형 인재입니다. 엑셀 수준으로 준비된 답변 스크립트와 높은 성실도로 신뢰감을 줍니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">6. ESTJ - 전략 기획 총괄 지원자 👑</h3>
+                <p class="mt-1 text-[11px]">강력한 리더십과 실무 추진력을 갖췄습니다. 면접장에서 팀을 이끌어본 경험과 즉시 실무 투입 가능한 자신감을 어필합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">7. ENFP - 무한긍정 멘탈 갑 지원자 🔥</h3>
+                <p class="mt-1 text-[11px]">지치지 않는 열정과 밝은 에너지를 보유했습니다. 실패나 탈락 통보에도 빠르게 털어내고 새로운 기회에 도전하는 긍정형 인재입니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">8. ESFP - 면접장 신스틸러 🌟</h3>
+                <p class="mt-1 text-[11px]">뛰어난 친화력으로 대기실 분위기를 주도합니다. 자연스러운 호감과 인사를 통해 면접관의 호감을 사로잡는 분위기 메이커입니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">9. INTJ - 완벽주의 전략 마스터 🎯</h3>
+                <p class="mt-1 text-[11px]">기업의 5년 후 시장 점유율까지 고려하는 장기 지략가입니다. 논리적 허점이 없는 철벽 자소서와 면접 준비를 자랑합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">10. INTP - 디테일 고찰 파헤치기형 🧪</h3>
+                <p class="mt-1 text-[11px]">문제의 본질을 깊이 있게 탐구하는 분석가입니다. 남들이 생각하지 못하는 독창적인 시각으로 기술적 문제 해결력을 제시합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">11. ENTJ - 차기 CEO 면접자 👔</h3>
+                <p class="mt-1 text-[11px]">압도적인 아우라와 비전을 지닌 리더입니다. 면접관의 질문에 위축되지 않고 확실한 입사 후 로드맵으로 확신을 부여합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">12. ISFP - 평화주의 숨은 실력자 🎨</h3>
+                <p class="mt-1 text-[11px]">튀지 않지만 실속 있고 유연하게 조직에 적응하는 지원자입니다. 온화한 태도와 안정적인 실행력으로 평가받습니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">13. ISFJ - 헌신적 성실의 아이콘 🛡️</h3>
+                <p class="mt-1 text-[11px]">책임감과 세심한 서포트 능력으로 신뢰를 주는 서포터형 인재입니다. 팀의 구멍을 메우는 든든한 조력자 역할을 강조합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">14. ESFJ - 친화력 200% 조직 밀착형 🤝</h3>
+                <p class="mt-1 text-[11px]">어느 조직에 던져져도 빠르게 적응하는 협동형 인재입니다. 소통 경험과 원만한 팀워크 구축 사례를 일목요연하게 전달합니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">15. ENFJ - 비전 제시 리더 지원자 🌈</h3>
+                <p class="mt-1 text-[11px]">동료 지원자와 면접관 모두에게 동기부여를 주는 멘토형 지원자입니다. 공동 목표 달성을 위한 소통 역량이 돋보입니다.</p>
+              </div>
+
+              <div class="p-3 bg-purple-50/60 rounded-lg border border-purple-100">
+                <h3 class="font-black text-slate-900 text-xs">16. ISTP - 실전 무심 마이웨이 🔧</h3>
+                <p class="mt-1 text-[11px]">군더더기 없는 명쾌한 답변과 문제 해결 능력의 실무파입니다. 과장 없이 사실에 기반한 검증된 역량을 보여줍니다.</p>
+              </div>
+
+            </div>
+          </details>
+        </article>
+
+        <!-- Bottom Ad Container -->
+        <div class="w-full min-h-[50px] bg-slate-50 border border-slate-200/60 rounded-xl flex items-center justify-center overflow-hidden my-2">
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; text-align:center;"
+               data-ad-client="ca-pub-4403789108346139"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
         </div>
 
       </section>
+
 
       <!-- ================= 2. QUIZ SCREEN ================= -->
       <section id="quiz-screen" class="hidden flex-1 flex flex-col justify-between fade-in space-y-5">
@@ -310,10 +437,13 @@
           </button>
         </div>
 
-        <!-- Fixed Quiz Bottom Ad Placeholder -->
-        <div class="adsense-placeholder w-full py-3 px-4 rounded-xl flex items-center justify-center text-xs text-slate-500 text-center mt-2 font-medium">
-          <i class="fa-solid fa-rectangle-ad text-purple-600 mr-2"></i>
-          <span>[AD] Google AdSense 고정형 배너 광고</span>
+        <!-- Fixed Quiz Bottom Ad Unit -->
+        <div class="w-full min-h-[50px] bg-slate-50 border border-slate-200/60 rounded-xl flex items-center justify-center overflow-hidden mt-2">
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; text-align:center;"
+               data-ad-client="ca-pub-4403789108346139"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
         </div>
 
       </section>
@@ -338,12 +468,14 @@
           </div>
         </div>
 
-        <!-- Large Center Interstitial Ad Placeholder -->
+        <!-- Large Center Interstitial Ad Unit -->
         <div class="w-full space-y-2 my-auto">
-          <div class="adsense-placeholder w-full h-56 rounded-2xl flex flex-col items-center justify-center p-4 text-slate-500 text-center border-2 border-dashed border-purple-300 bg-white">
-            <i class="fa-solid fa-rectangle-ad text-4xl text-purple-600 mb-2"></i>
-            <span class="font-extrabold text-sm text-slate-800">[AD] Google AdSense 대형 전면 광고 영역</span>
-            <span class="text-[11px] text-slate-500 mt-1.5 font-medium">분석이 완료되면 자동으로 결과 리포트로 이동합니다.</span>
+          <div class="w-full min-h-[250px] bg-slate-50 border border-slate-200/60 rounded-2xl flex items-center justify-center overflow-hidden">
+            <ins class="adsbygoogle"
+                 style="display:block; width:100%; text-align:center;"
+                 data-ad-client="ca-pub-4403789108346139"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
           </div>
         </div>
 
@@ -419,10 +551,13 @@
           </div>
         </div>
 
-        <!-- Result Ad Placeholder -->
-        <div class="adsense-placeholder w-full py-3 px-4 rounded-xl flex items-center justify-center text-xs text-slate-500 text-center font-medium my-1">
-          <i class="fa-solid fa-rectangle-ad text-purple-600 mr-2"></i>
-          <span>[AD] Google AdSense 결과 맞춤형 광고</span>
+        <!-- Result Ad Unit -->
+        <div class="w-full min-h-[50px] bg-slate-50 border border-slate-200/60 rounded-xl flex items-center justify-center overflow-hidden my-1">
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; text-align:center;"
+               data-ad-client="ca-pub-4403789108346139"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
         </div>
 
         <!-- Clean Full-Width Link Copy Section -->
@@ -475,8 +610,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full py-5 px-5 text-center text-[11px] text-slate-500 border-t border-slate-200 bg-white space-y-2">
-      <p>© 2026 MYTI Job Persona Test. 100% Client-side JS Service.</p>
+    <footer class="w-full py-5 px-5 text-center text-[11px] text-slate-500 border-t border-slate-200 bg-white space-y-2.5">
+      <div class="flex justify-center space-x-3 text-xs font-bold text-slate-600">
+        <button onclick="openModal('privacy')" class="hover:text-purple-700 underline cursor-pointer">개인정보처리방침</button>
+        <span>|</span>
+        <button onclick="openModal('terms')" class="hover:text-purple-700 underline cursor-pointer">이용약관</button>
+      </div>
+
+      <p>© 2026 MYTI Job Persona Test. All rights reserved.</p>
       <p class="text-[11px] text-slate-600 font-medium">
         Powered by <a href="https://draft-ethan.vercel.app/" target="_blank" rel="noopener noreferrer" class="underline text-purple-700 hover:text-purple-900 font-bold">draft_ethan</a>
       </p>
@@ -497,6 +638,57 @@
     </div>
 
   </div>
+
+  <!-- PRIVACY POLICY MODAL -->
+  <div id="privacy-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 max-h-[80vh] overflow-y-auto shadow-2xl border border-slate-200 text-slate-800 text-xs">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <h3 class="text-base font-black text-slate-900">개인정보처리방침 (Privacy Policy)</h3>
+        <button onclick="closeModal('privacy')" class="text-slate-400 hover:text-slate-700 text-lg font-black">&times;</button>
+      </div>
+      <div class="space-y-3 leading-relaxed text-slate-600">
+        <p>MYTI(이하 '서비스')는 이용자의 개인정보를 중요시하며, 「개인정보 보호법」 및 Google AdSense 관련 게시자 정책을 준수합니다.</p>
+        
+        <h4 class="font-bold text-slate-900 text-xs">1. 수집하는 개인정보 항목</h4>
+        <p>본 서비스는 100% 클라이언트 사이드 JavaScript 기반 심리 테스트로, 사용자의 별도 회원가입이나 이름, 전화번호, 이메일 등의 개인식별정보를 서버에 저장하지 않습니다.</p>
+
+        <h4 class="font-bold text-slate-900 text-xs">2. 쿠키(Cookie) 및 제3자 광고 서비스 이용 안내</h4>
+        <p>본 사이트는 Google AdSense(구글 애드센스)를 포함한 제3자 광고 네트워크를 통해 맞춤형 광고를 제공할 수 있습니다. Google을 포함한 타사 공급업체는 쿠키를 사용하여 사용자의 이전 웹사이트 방문 기록을 바탕으로 광고를 게재합니다.</p>
+        <p>Google의 DART 쿠키 사용을 통해 Google 및 파트너사는 이용자의 본 사이트 및 인터넷 타 사이트 방문 정보를 기반으로 적절한 광고를 제공할 수 있습니다.</p>
+        <p>이용자는 <a href="https://www.google.com/settings/ads" target="_blank" class="text-purple-600 underline">Google 광고 설정</a>에서 맞춤형 광고 수집을 거부(Opt-out)할 수 있습니다.</p>
+
+        <h4 class="font-bold text-slate-900 text-xs">3. 문의처</h4>
+        <p>서비스 및 개인정보 관련 문의사항은 인스타그램 @draft_ethan 계정으로 연락해주시기 바랍니다.</p>
+      </div>
+      <div class="pt-2 text-right">
+        <button onclick="closeModal('privacy')" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-xl text-xs">확인 및 닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMS OF SERVICE MODAL -->
+  <div id="terms-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 max-h-[80vh] overflow-y-auto shadow-2xl border border-slate-200 text-slate-800 text-xs">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <h3 class="text-base font-black text-slate-900">서비스 이용약관</h3>
+        <button onclick="closeModal('terms')" class="text-slate-400 hover:text-slate-700 text-lg font-black">&times;</button>
+      </div>
+      <div class="space-y-3 leading-relaxed text-slate-600">
+        <h4 class="font-bold text-slate-900 text-xs">1. 목적</h4>
+        <p>본 약관은 MYTI가 제공하는 취업/이직 페르소나 진단 서비스의 이용 조건 및 절차를 규정함을 목적으로 합니다.</p>
+
+        <h4 class="font-bold text-slate-900 text-xs">2. 서비스 제공 및 저작권</h4>
+        <p>MYTI에서 제공하는 모든 문항, 페르소나 분석 결과 텍스트, 캐릭터 카드 디자인의 저작권은 MYTI 및 개발자에게 있습니다. 본 서비스는 취업 성향 분석 참고용 무료 진단 도구입니다.</p>
+
+        <h4 class="font-bold text-slate-900 text-xs">3. 책임의 한계</h4>
+        <p>본 테스트 결과는 이용자의 입력값을 바탕으로 생성된 자가 진단 결과이며, 실제 채용 및 입사 결과를 보장하지 않습니다.</p>
+      </div>
+      <div class="pt-2 text-right">
+        <button onclick="closeModal('terms')" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-xl text-xs">확인 및 닫기</button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- APPLICATION LOGIC (Vanilla JS) -->
   <script>
@@ -998,6 +1190,25 @@
       } catch (e) {}
       startQuiz();
     }
+
+    // 11. MODAL CONTROLS FOR PRIVACY & TERMS
+    function openModal(type) {
+      const modal = document.getElementById(`${type}-modal`);
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeModal(type) {
+      const modal = document.getElementById(`${type}-modal`);
+      if (modal) modal.classList.add("hidden");
+    }
+
+    // Close modals on escape key or backdrop click
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal("privacy");
+        closeModal("terms");
+      }
+    });
 
     // 10. ON LOAD DEEP-LINKING CHECK
     window.addEventListener("DOMContentLoaded", () => {
