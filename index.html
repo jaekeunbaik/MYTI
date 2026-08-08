@@ -587,13 +587,13 @@
             <div class="w-full p-4 rounded-2xl bg-gradient-to-r from-amber-400 via-pink-500 to-purple-600 p-[2px] shadow-xl hover:-translate-y-0.5 transition-transform">
               <div class="w-full h-full bg-white p-4 rounded-[14px] flex items-center justify-between group-hover:bg-purple-50/50 transition-colors">
                 <div class="space-y-1 text-left">
-                  <div class="inline-flex items-center text-[10px] font-black px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300">
+                  <div id="cta-badge" class="inline-flex items-center text-[10px] font-black px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300">
                     🔥 3초 무료 AI 자소서 검수
                   </div>
-                  <div class="text-sm font-black text-slate-900 group-hover:text-purple-700 transition-colors">
+                  <div id="cta-title" class="text-sm font-black text-slate-900 group-hover:text-purple-700 transition-colors">
                     🎁 내 진짜 자소서 점수가 궁금하다면?
                   </div>
-                  <div class="text-[11px] text-slate-600 font-extrabold">
+                  <div id="cta-desc" class="text-[11px] text-slate-600 font-extrabold">
                     인공지능 팩폭 진단받고 서류 합격률 UP
                   </div>
                 </div>
@@ -659,105 +659,7 @@
 
         <h4 class="font-bold text-slate-900 text-xs">3. 문의처</h4>
         <p>서비스 및 개인정보 관련 문의사항은 인스타그램 @draft_ethan 계정으로 연락해주시기 바랍니다.</p>
-      </div>
-      <div class="pt-2 text-right">
-        <button onclick="closeModal('privacy')" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-xl text-xs">확인 및 닫기</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TERMS OF SERVICE MODAL -->
-  <div id="terms-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 max-h-[80vh] overflow-y-auto shadow-2xl border border-slate-200 text-slate-800 text-xs">
-      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-        <h3 class="text-base font-black text-slate-900">서비스 이용약관</h3>
-        <button onclick="closeModal('terms')" class="text-slate-400 hover:text-slate-700 text-lg font-black">&times;</button>
-      </div>
-      <div class="space-y-3 leading-relaxed text-slate-600">
-        <h4 class="font-bold text-slate-900 text-xs">1. 목적</h4>
-        <p>본 약관은 MYTI가 제공하는 취업/이직 페르소나 진단 서비스의 이용 조건 및 절차를 규정함을 목적으로 합니다.</p>
-
-        <h4 class="font-bold text-slate-900 text-xs">2. 서비스 제공 및 저작권</h4>
-        <p>MYTI에서 제공하는 모든 문항, 페르소나 분석 결과 텍스트, 캐릭터 카드 디자인의 저작권은 MYTI 및 개발자에게 있습니다. 본 서비스는 취업 성향 분석 참고용 무료 진단 도구입니다.</p>
-
-        <h4 class="font-bold text-slate-900 text-xs">3. 책임의 한계</h4>
-        <p>본 테스트 결과는 이용자의 입력값을 바탕으로 생성된 자가 진단 결과이며, 실제 채용 및 입사 결과를 보장하지 않습니다.</p>
-      </div>
-      <div class="pt-2 text-right">
-        <button onclick="closeModal('terms')" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-xl text-xs">확인 및 닫기</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- APPLICATION LOGIC (Vanilla JS) -->
-  <script>
-    // 1. QUESTION DATASET (12 Questions)
-    const questions = [
-      {
-        q: "Q1. 합격률을 높이기 위해 스터디를 모집한다는 글을 보았다.",
-        a: { text: '"혼자 하면 루즈해지지!" 바로 스터디에 참여한다.', trait: "E" },
-        b: { text: '"남 신경 쓰이고 피곤해..." 혼자 조용히 준비한다.', trait: "I" }
-      },
-      {
-        q: "Q2. 면접장에 도착했는데 대기실 분위기가 너무 정막하다.",
-        a: { text: "옆 지원자에게 살갑게 말을 걸어 분위기를 푼다.", trait: "E" },
-        b: { text: "대본을 보며 '제발 나한테 말 걸지 마라' 기도한다.", trait: "I" }
-      },
-      {
-        q: "Q3. 드디어 원하는 회사에 최종 합격했다!",
-        a: { text: "인스타 업로드 + 친구 카톡방에 소문내며 벼락 파티를 연다.", trait: "E" },
-        b: { text: "친한 사람에게만 알리고 집에서 차분히 쉰다.", trait: "I" }
-      },
-      {
-        q: "Q4. '본인의 장단점' 항목을 작성할 때 나는?",
-        a: { text: "실제로 경험했던 구체적인 동아리/알바 성과와 숫자 위주로 적는다.", trait: "S" },
-        b: { text: "나의 성장 가능성, 비전, 추상적인 가치관과 철학을 중심으로 적는다.", trait: "N" }
-      },
-      {
-        q: "Q5. 채용 공고를 볼 때 가장 먼저 눈에 들어오는 것은?",
-        a: { text: "연봉, 근무지, 복리후생, 정확한 담당 업무(R&R)", trait: "S" },
-        b: { text: "회사의 미래 성장성, 기업 문화, 서비스의 혁신성", trait: "N" }
-      },
-      {
-        q: "Q6. 면접 전날, 머릿속을 채우는 생각은?",
-        a: { text: "'1분 자기소개, 지원동기, 마지막 한마디 복습하자.'", trait: "S" },
-        b: { text: "'만약 면접관이 갑자기 춤추라고 하면 어쩌지?' 온가지 꼬리물기 상상", trait: "N" }
-      },
-      {
-        q: "Q7. 친구에게 내 자소서를 보여줬더니 \"글이 좀 어색해\"라고 한다.",
-        a: { text: '"어느 문장? 구체적으로 지적해 줘. 논리가 안 맞아?"', trait: "T" },
-        b: { text: '(속으로 섭섭...) "아 그래? 고마워..." 하며 상처받는다.', trait: "F" }
-      },
-      {
-        q: "Q8. 면접관이 \"우리 회사 오려고 무슨 노력 하셨어요?\"라고 물었을 때?",
-        a: { text: "직무 관련 자격증, 프로젝트 등 객관적 결과물을 열거한다.", trait: "T" },
-        b: { text: "이 회사에 대한 나의 진심과 열정, 간절했던 계기를 어필한다.", trait: "F" }
-      },
-      {
-        q: "Q9. \"아쉽게도 합격 소식을 전하지 못하게 되었습니다\" 문자를 받았다.",
-        a: { text: "'어느 부분이 부족했지?' 서류나 면접 답변 복기부터 시작한다.", trait: "T" },
-        b: { text: "'나 진짜 열심히 했는데...' 감정 정리가 안 돼 우울해한다.", trait: "F" }
-      },
-      {
-        q: "Q10. 자소서 마감일이 일주일 남아있을 때 나의 모습은?",
-        a: { text: "요일별로 작성할 문항을 나눠두고 차근차근 완성해 나간다.", trait: "J" },
-        b: { text: "일단 놀다가 마감 D-1, D-Day에 초인의 집중력을 발휘한다.", trait: "P" }
-      },
-      {
-        q: "Q11. 면접 답변 준비 스타일은?",
-        a: { text: "예상 질문과 답변 대본을 토시 하나까지 스크립트로 짜둔다.", trait: "J" },
-        b: { text: "키워드 몇 개만 머릿속에 넣어두고 가서 임기응변으로 말한다.", trait: "P" }
-      },
-      {
-        q: "Q12. 이번 달 나의 취업/이직 활동 계획은?",
-        a: { text: "캘린더에 기업별 마감일과 제출 목록이 깔끔하게 정돈되어 있다.", trait: "J" },
-        b: { text: "에브리타임이나 톡방에 공고 뜨면 그때그때 지원한다.", trait: "P" }
-      }
-    ];
-
-    // 2. ALL 16 MBTI RESULT DATASET
-    const mytiResults = {
+      const mytiResults = {
       ESTP: {
         title: "벼락치기의 연금술사",
         tagline: '"마감 1시간 전이 진짜 내 실력이다."',
@@ -769,7 +671,10 @@
           "합격하면 실력, 불합격하면 '이 회사가 날 담기엔 그릇이 작았네'"
         ],
         best: { code: "ISFJ", desc: "꼼꼼한 서포터 지원자" },
-        worst: { code: "INFP", desc: "면접장의 감성 로봇" }
+        worst: { code: "INFP", desc: "면접장의 감성 로봇" },
+        ctaBadge: "⚡ ESTP 벼락치기 연금술사 맞춤",
+        ctaTitle: "⚡ 마감 1시간 전 자소서? AI 팩폭으로 3초 만에 완성!",
+        ctaDesc: "순발력 넘치는 에피소드를 합격률 높은 비즈니스 어체로 교정해 드립니다."
       },
       ENTP: {
         title: "아이디어 폭주 자소서",
@@ -778,6 +683,240 @@
         subDesc: "창의적인 입담과 직설적인 논리로 무장한 지원자",
         facts: [
           "지원동기에 회사 단점 지적하고 개선안 제시하다 면접관 눈동자 흔들림",
+          "자기소개서 쓰다가 혼자 신나서 비즈니스 모델 하나 창업할 기세",
+          "'왜 우리 회사인가요?' 질문에 순간 당황하지만 화려한 혀놀림으로 포장 완료"
+        ],
+        best: { code: "INFJ", desc: "취준계의 은둔 신선" },
+        worst: { code: "ISFJ", desc: "헌신적 성실의 아이콘" },
+        ctaBadge: "💡 ENTP 아이디어 폭주 맞춤",
+        ctaTitle: "💡 튀는 아이디어 자소서, 면접관 설득하는 논리로 정교화!",
+        ctaDesc: "직설적인 주장을 비즈니스 임팩트로 승화시키는 AI 팩폭 첨삭 솔루션."
+      },
+      INFP: {
+        title: "면접장의 감성 로봇",
+        tagline: '"머릿속엔 대본이 있었는데요, 없어졌습니다."',
+        icon: "🤖",
+        subDesc: "풍부한 가치관과 공감 능력을 가진 진정성형 지원자",
+        facts: [
+          "면접관의 따뜻한 눈빛 한 번에 속으로 이미 이 회사 10년 장기근속함",
+          "'압박 면접' 들어오면 속으로 울면서 멘탈 겉바속촉 바삭해짐",
+          "탈락 통보 받으면 '내가 문제인가' 밤새 자책하다가 3일 뒤 부활"
+        ],
+        best: { code: "ENFJ", desc: "비전 제시 리더 지원자" },
+        worst: { code: "ESTP", desc: "벼락치기의 연금술사" },
+        ctaBadge: "🤖 INFP 감성 지원자 맞춤",
+        ctaTitle: "🤖 감성 문장 자소서? 채용 담당자 맞춤 전문 문체로 교정!",
+        ctaDesc: "진정성 가득한 에피소드를 합격 자소서 전문 어조로 다듬어 드립니다."
+      },
+      INFJ: {
+        title: "취준계의 은둔 신선",
+        tagline: '"회사 가치관과 내 영혼의 싱크로율을 분석 중입니다."',
+        icon: "🔮",
+        subDesc: "깊이 있는 통찰력과 명확한 소신을 품은 비밀병기",
+        facts: [
+          "기업 리서치만 3일 동안 해서 회사 대표보다 더 상세한 비전 파악",
+          "겉으로는 조용하고 차분하지만 자소서 문장 하나하나에 뼈가 있음",
+          "면접장에서 나를 증명하는 것보다 면접관의 성향을 읽고 있는 자신을 발견함"
+        ],
+        best: { code: "ENTP", desc: "아이디어 폭주 자소서" },
+        worst: { code: "ESTP", desc: "벼락치기의 연금술사" },
+        ctaBadge: "🔮 INFJ 은둔 신선 맞춤",
+        ctaTitle: "🔮 깊은 통찰력의 자소서, 선명한 성과 지표로 완성하기!",
+        ctaDesc: "회사 비전과 나의 역량을 정교하게 일치시키는 정밀 AI 아키텍트."
+      },
+      ISTJ: {
+        title: "AI급 데이터 수집가",
+        tagline: '"감정 빼고 팩트와 숫자로 승부한다."',
+        icon: "📊",
+        subDesc: "철두철미한 준비성과 데이터 중심의 완벽 주의자",
+        facts: [
+          "자소서 경험 항목에 수치, 데이터, 증빙 자료 완벽 정돈",
+          "예상 질문 100개 스크립트 엑셀 파일로 세분화 완료",
+          "돌발 질문 들어오면 순간 입력 오류 나지만 정석대로 무난하게 통과"
+        ],
+        best: { code: "ESFP", desc: "면접장 신스틸러" },
+        worst: { code: "ENFP", desc: "무한긍정 멘탈 갑 지원자" },
+        ctaBadge: "📊 ISTJ 데이터 수집가 맞춤",
+        ctaTitle: "📊 꼼꼼한 경험 데이터, 수치화된 성과 문장으로 구조화!",
+        ctaDesc: "채용 담당자가 한눈에 읽을 수 있도록 AI가 정밀 분석 및 교정합니다."
+      },
+      ESTJ: {
+        title: "전략 기획 총괄 지원자",
+        tagline: '"내가 합격하면 이 팀 프로젝트 싹 정돈해드립니다."',
+        icon: "👑",
+        subDesc: "강력한 리더십과 리얼 커리어 실무형 지원자",
+        facts: [
+          "면접장에서 이미 팀장 포스로 리더십과 실행력 어필",
+          "마감일 일주일 전 자소서 제출 완료하고 다음 공고 준비 중",
+          "스터디 모집하면 본인이 자연스럽게 리더 맡아서 분위기 주도함"
+        ],
+        best: { code: "ISFP", desc: "평화주의 숨은 실력자" },
+        worst: { code: "INFP", desc: "면접장의 감성 로봇" },
+        ctaBadge: "👑 ESTJ 리더 지원자 맞춤",
+        ctaTitle: "👑 압도적 리더십 자소서, 실무 임팩트 문장으로 극대화!",
+        ctaDesc: "강력한 리더십과 실행력을 채용 담당자가 선호하는 팩폭 문체로 연출."
+      },
+      ENFP: {
+        title: "무한긍정 멘탈 갑 지원자",
+        tagline: '"탈락도 성장의 과정! 다음 회사 드루와!"',
+        icon: "🔥",
+        subDesc: "지치지 않는 에너지를 가진 분위기 메이커",
+        facts: [
+          "서류 50개 쓰면서 50가지 새로운 꿈과 미래를 상상함",
+          "면접장에서 특유의 해맑은 에너지로 면접관 아빠미소 만듦",
+          "서류 떨어져도 '나를 놓치다니 이 회사 손해지 ㅋ' 하고 5분 만에 훌훌 털어냄"
+        ],
+        best: { code: "INTJ", desc: "완벽주의 전략 마스터" },
+        worst: { code: "ISTJ", desc: "AI급 데이터 수집가" },
+        ctaBadge: "🔥 ENFP 무한긍정 맞춤",
+        ctaTitle: "🔥 톡톡 튀는 열정 스토리, 합격 자소서로 딱 정리하기!",
+        ctaDesc: "풍부한 경험과 무한한 열정을 서류 합격 기준에 맞게 다듬어 드립니다."
+      },
+      ESFP: {
+        title: "면접장 신스틸러",
+        tagline: '"어색한 면접 대기실? 분위기 메이커 등장!"',
+        icon: "🌟",
+        subDesc: "친화력 100%의 실전 인싸형 지원자",
+        facts: [
+          "대기실의 정적을 못 견디고 다른 지원자한테 '떨리시죠?' 말검",
+          "자기소개할 때 과하지 않게 인간미 넘치는 호감형 필살기 발사",
+          "분위기 타서 혼자 신나서 필요 이상으로 TMI 방출할 위험 있음"
+        ],
+        best: { code: "ISTJ", desc: "AI급 데이터 수집가" },
+        worst: { code: "INTJ", desc: "완벽주의 전략 마스터" },
+        ctaBadge: "🌟 ESFP 신스틸러 맞춤",
+        ctaTitle: "🌟 남다른 친화력과 소통 역량, 직무 전문성으로 승화!",
+        ctaDesc: "인간미 넘치는 에피소드를 차별화된 핵심 직무 역량으로 교정합니다."
+      },
+      INTJ: {
+        title: "완벽주의 전략 마스터",
+        tagline: '"합격은 이미 계산된 시나리오 안에 있다."',
+        icon: "🎯",
+        subDesc: "기업을 파악하고 공략법을 설계하는 철두철미한 지략가",
+        facts: [
+          "회사의 5년 후 마켓 점유율 분석해서 역으로 면접관 질문 준비",
+          "비효율적인 자소서 질문 보면 혼자 속으로 혀를 차며 작성함",
+          "면접관의 어설픈 꼬리질문도 논리적으로 다 막아내는 철벽 수비"
+        ],
+        best: { code: "ENFP", desc: "무한긍정 멘탈 갑 지원자" },
+        worst: { code: "ESFP", desc: "면접장 신스틸러" },
+        ctaBadge: "🎯 INTJ 전략 마스터 맞춤",
+        ctaTitle: "🎯 철벽 논리 자소서, 군더더기 없는 완벽한 아키텍처 구축!",
+        ctaDesc: "비효율적인 문장을 모두 깎아내고 논리적 정교함을 최고 수치로 끌어올립니다."
+      },
+      INTP: {
+        title: "디테일 고찰 파헤치기형",
+        tagline: '"회사 분석하다 질문에 꽂혀 논문 쓸 기세."',
+        icon: "🧪",
+        subDesc: "본질을 탐구하고 호기심으로 무장한 데이터 분석가",
+        facts: [
+          "지원 동기 쓰다가 회사의 근본적인 기술적 문제점에 꽂혀서 밤샘",
+          "뻔한 자기소개서 질문에 본질적인 질문 던지고 싶어 입이 근질거림",
+          "면접장에서 혼자 머릿속으로 깊게 생각하느라 정적 3초 흐름"
+        ],
+        best: { code: "ENTJ", desc: "차기 CEO 면접자" },
+        worst: { code: "ESFJ", desc: "친화력 200% 조직 밀착형" },
+        ctaBadge: "🧪 INTP 기술 고찰 맞춤",
+        ctaTitle: "🧪 복잡한 기술 경험, 명쾌하고 강렬하게 구조화하기!",
+        ctaDesc: "깊이 있는 호기심과 기술적 해결 과정을 가독성 높은 성과 문장으로 변환."
+      },
+      ENTJ: {
+        title: "차기 CEO 면접자",
+        tagline: '"면접 보러 왔습니다. 아, 제가 평가하는 건가요?"',
+        icon: "👔",
+        subDesc: "목표 지향적이고 압도적인 비전을 어필하는 리더",
+        facts: [
+          "압박 면접 받으면 속으로 '오냐 승부다' 하고 눈에 힘 들어감",
+          "입사 후 3년, 5년, 10년 로드맵이 대표이사 수준으로 명확함",
+          "자신감 넘치는 태도로 면접장을 리드하여 면접관을 당황시킴"
+        ],
+        best: { code: "INTP", desc: "디테일 고찰 파헤치기형" },
+        worst: { code: "ISFP", desc: "평화주의 숨은 실력자" },
+        ctaBadge: "👔 ENTJ 비전 리더 맞춤",
+        ctaTitle: "👔 입사 후 로드맵과 비전, 면접관이 전율할 문장으로 다듬기!",
+        ctaDesc: "압도적인 자신감과 전략적 로드맵을 선명한 비즈니스 팩폭으로 검수합니다."
+      },
+      ISFP: {
+        title: "평화주의 숨은 실력자",
+        tagline: '"튀지 않고 묵묵히 내 할 일 다 하겠습니다."',
+        icon: "🎨",
+        subDesc: "조용하지만 실속 있고 유연하게 적응하는 지원자",
+        facts: [
+          "자기 PR 하라고 하면 내 자랑하는 것 같아 쑥스러움 극치",
+          "벼락치기로 자소서 쓰면서 '어떻게든 되겠지' 하고 마감 10분 전 제출",
+          "온화하고 따뜻한 면접 분위기에서 최고의 실력 발휘"
+        ],
+        best: { code: "ESTJ", desc: "전략 기획 총괄 지원자" },
+        worst: { code: "ENTJ", desc: "차기 CEO 면접자" },
+        ctaBadge: "🎨 ISFP 숨은 실력자 맞춤",
+        ctaTitle: "🎨 자랑하기 쑥스러웠던 내 강점, 세련된 자소서로 완성!",
+        ctaDesc: "묵묵히 해결해낸 실전 성과를 AI가 세련되고 당당한 어조로 교정해 드립니다."
+      },
+      ISFJ: {
+        title: "헌신적 성실의 아이콘",
+        tagline: '"팀의 구멍을 메우는 든든한 조용한 지원군."',
+        icon: "🛡️",
+        subDesc: "책임감과 꼼꼼함으로 조직의 신뢰를 받는 서포터",
+        facts: [
+          "이전 조직에서의 세심한 지원 경험과 성실함으로 신뢰 획득",
+          "남을 돋보이게 한 에피소드가 많아서 자기소개서가 은근 따뜻함",
+          "면접 때 떨려서 목소리 살짝 떨리지만 진정성으로 면접관 마음 흔듦"
+        ],
+        best: { code: "ESTP", desc: "벼락치기의 연금술사" },
+        worst: { code: "ENTP", desc: "아이디어 폭주 자소서" },
+        ctaBadge: "🛡️ ISFJ 성실 아이콘 맞춤",
+        ctaTitle: "🛡️ 꼼꼼한 헌신과 책임감, 강력한 조직 기여 문장으로 변환!",
+        ctaDesc: "팀을 위해 헌신한 소중한 경험을 채용 담당자 선호 1위 문장으로 교정."
+      },
+      ESFJ: {
+        title: "친화력 200% 조직 밀착형",
+        tagline: '"어느 팀에 던져져도 1분 만에 적응 완료!"',
+        icon: "🤝",
+        subDesc: "조직 내 온기를 더하고 협동 시너지를 내는 인재",
+        facts: [
+          "자소서에 팀워크, 협동, 소통 에피소드 무한 생성 가능",
+          "면접관의 리액션에 센스 있게 반응하며 호감도 극대화",
+          "불합격하면 나보다 같이 준비한 주변 사람들이 더 아쉬워해 줌"
+        ],
+        best: { code: "ISFP", desc: "평화주의 숨은 실력자" },
+        worst: { code: "INTP", desc: "디테일 고찰 파헤치기형" },
+        ctaBadge: "🤝 ESFJ 친화력 200% 맞춤",
+        ctaTitle: "🤝 뛰어난 소통 시너지 경험, 합격 자소서 공식으로 정돈!",
+        ctaDesc: "원만한 팀워크와 협동 에피소드를 직무 맞춤형 성과 문장으로 변환해 드립니다."
+      },
+      ENFJ: {
+        title: "비전 제시 리더 지원자",
+        tagline: '"우리 함께 이 회사를 위대하게 만듭시다!"',
+        icon: "🌈",
+        subDesc: "상대방을 동기부여하고 사람을 모으는 멘토형 지원자",
+        facts: [
+          "면접에서 팀 내 분위기 형성 및 동기부여 경험을 감동적으로 설명",
+          "자기 일처럼 동료 취준생 자소서 피드백해 주다 본인 거 늦게 씀",
+          "선한 영향력과 특유의 호감형 오라로 면접관 전원 포섭"
+        ],
+        best: { code: "INFP", desc: "면접장의 감성 로봇" },
+        worst: { code: "ISTP", desc: "실전 무심 마이웨이" },
+        ctaBadge: "🌈 ENFJ 동기부여 리더 맞춤",
+        ctaTitle: "🌈 선한 영향력과 동기부여 경험, 신뢰감 주는 문체로 다듬기!",
+        ctaDesc: "상대방을 모으는 리더십 스토리를 채용 담당자가 신뢰하는 문장으로 교정."
+      },
+      ISTP: {
+        title: "실전 무심 마이웨이",
+        tagline: '"말보다는 결과로 보여드리겠습니다."',
+        icon: "🔧",
+        subDesc: "군더더기 없이 깔끔하게 문제를 해결하는 실무파",
+        facts: [
+          "감정 이입 없는 담백하고 간결한 자소서 문체",
+          "면접에서 핵심만 딱 말하고 입 다물어서 면접관이 추가 질문 유도함",
+          "억지 과장은 질색, 있는 사실 그대로만 깔끔하게 답변"
+        ],
+        best: { code: "ESFJ", desc: "친화력 200% 조직 밀착형" },
+        worst: { code: "ENFJ", desc: "비전 제시 리더 지원자" },
+        ctaBadge: "🔧 ISTP 실전 무심 맞춤",
+        ctaTitle: "🔧 담백하고 깔끔한 문제 해결력, 핵심 직무 역량으로 정교화!",
+        ctaDesc: "군더더기 없는 실무파 에피소드를 직무 핵심 임팩트 문장으로 정교화합니다."
+      }
+    };��사 단점 지적하고 개선안 제시하다 면접관 눈동자 흔들림",
           "자기소개서 쓰다가 혼자 신나서 비즈니스 모델 하나 창업할 기세",
           "'왜 우리 회사인가요?' 질문에 순간 당황하지만 화려한 혀놀림으로 포장 완료"
         ],
